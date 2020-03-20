@@ -1,0 +1,2 @@
+1) docker login -u shoepping
+2) docker push shoepping/k8s-tools:20.03.20
