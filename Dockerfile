@@ -3,16 +3,19 @@
 # https://github.com/lachie83/k8s-kubectl/blob/master/Dockerfile
 # https://github.com/nosinovacao/fluxctl-docker/blob/master/Dockerfile
 # https://github.com/alpine-docker/helm/blob/master/Dockerfile 
+# https://github.com/Azure/azure-cli/issues/8863
 
 FROM alpine:3.9
 
 ENV FLUX_VERSION=1.18.0
 ENV HELM_VERSION=3.1.1
 ENV KUBECTL_VERSION=1.15.10
+ENV AZURE_CLI_VERSION=2.3.1
 
 LABEL KUBECTL_VERSION=${KUBECTL_VERSION}
 LABEL HELM_VERSION=${HELM_VERSION}
 LABEL FLUX_VERSION=${FLUX_VERSION}
+LABEL AZURE_CLI_VERSION=${AZURE_CLI_VERSION}
 
 RUN apk add --update ca-certificates \
  && apk add --update -t deps curl \
@@ -39,4 +42,12 @@ RUN apk add --update --no-cache curl ca-certificates && \
     apk del curl && \
     rm -f /var/cache/apk/*
 
-RUN apk add bash
+# azure cli
+RUN apk add --no-cache curl tar openssl sudo bash jq python3
+RUN apk --update --no-cache add postgresql-client postgresql
+RUN apk add --virtual=build gcc libffi-dev musl-dev openssl-dev make python3-dev
+RUN pip3 install virtualenv &&\
+    python3 -m virtualenv /azure-cli
+RUN /azure-cli/bin/python -m pip --no-cache-dir install azure-cli==${AZURE_CLI_VERSION}
+COPY az /usr/bin/az
+RUN chmod +x /usr/bin/az
