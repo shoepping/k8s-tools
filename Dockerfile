@@ -7,15 +7,20 @@
 
 FROM alpine:3.9
 
-ENV FLUX_VERSION=1.18.0
-ENV HELM_VERSION=3.1.1
-ENV KUBECTL_VERSION=1.15.10
-ENV AZURE_CLI_VERSION=2.3.1
 
-LABEL KUBECTL_VERSION=${KUBECTL_VERSION}
-LABEL HELM_VERSION=${HELM_VERSION}
-LABEL FLUX_VERSION=${FLUX_VERSION}
-LABEL AZURE_CLI_VERSION=${AZURE_CLI_VERSION}
+# https://github.com/fluxcd/flux/releases
+ENV FLUX_VERSION=1.19.0
+# https://github.com/helm/helm/releases
+ENV HELM_VERSION=3.2.0
+# https://github.com/kubernetes/kubectl/releases
+ENV KUBECTL_VERSION=1.15.10
+# https://github.com/Azure/azure-cli/releases
+ENV AZURE_CLI_VERSION=2.5.1
+
+LABEL KUBECTL_VERSION=${KUBECTL_VERSION} \
+	HELM_VERSION=${HELM_VERSION} \
+	FLUX_VERSION=${FLUX_VERSION} \
+	AZURE_CLI_VERSION=${AZURE_CLI_VERSION}
 
 RUN apk add --update ca-certificates \
  && apk add --update -t deps curl \
