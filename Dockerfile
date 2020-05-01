@@ -2,7 +2,7 @@
 # Based on:
 # https://github.com/lachie83/k8s-kubectl/blob/master/Dockerfile
 # https://github.com/nosinovacao/fluxctl-docker/blob/master/Dockerfile
-# https://github.com/alpine-docker/helm/blob/master/Dockerfile 
+# https://github.com/alpine-docker/helm/blob/master/Dockerfile
 # https://github.com/Azure/azure-cli/issues/8863
 
 FROM alpine:3.9
@@ -56,3 +56,5 @@ RUN pip3 install virtualenv &&\
 RUN /azure-cli/bin/python -m pip --no-cache-dir install azure-cli==${AZURE_CLI_VERSION}
 COPY az /usr/bin/az
 RUN chmod +x /usr/bin/az
+
+COPY ./az_aks_browse.sh /root/az_aks_browse.sh
