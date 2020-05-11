@@ -11,9 +11,9 @@ FROM alpine:3.9
 # https://github.com/fluxcd/flux/releases
 ENV FLUX_VERSION=1.19.0
 # https://github.com/helm/helm/releases
-ENV HELM_VERSION=3.2.0
+ENV HELM_VERSION=3.2.1
 # https://github.com/kubernetes/kubectl/releases
-ENV KUBECTL_VERSION=1.15.10
+ENV KUBECTL_VERSION=1.16.7
 # https://github.com/Azure/azure-cli/releases
 ENV AZURE_CLI_VERSION=2.5.1
 
