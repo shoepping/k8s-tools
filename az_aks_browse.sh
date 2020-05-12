@@ -37,7 +37,7 @@ K8S_DASHBOARD_SECRET=$(kubectl --kubeconfig=${KUBE_CONF} -n kube-system get secr
 TOKEN=$(kubectl --kubeconfig=${KUBE_CONF} -n kube-system get ${K8S_DASHBOARD_SECRET} --output="jsonpath={.data.\token}" | base64 -d)
 echo "Token: "${TOKEN}
 
-echo "K8s Dashboard: http://localhost:${PORT}/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/#!/overview?namespace=${NAMESPACE}"
+echo "Use above Token to login into K8s Dashboard: http://localhost:${PORT}/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/#!/overview?namespace=${NAMESPACE}"
 echo ""
 
 az aks browse \
