@@ -5,7 +5,7 @@
 # https://github.com/alpine-docker/helm/blob/master/Dockerfile
 # https://github.com/Azure/azure-cli/issues/8863
 
-FROM alpine:3.9
+FROM alpine:3.11.6
 
 
 # https://github.com/fluxcd/flux/releases
