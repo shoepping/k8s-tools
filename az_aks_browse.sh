@@ -27,15 +27,20 @@ RESOURCE_GROUP=$(
         --name ${RESOURCE_GROUP} \
         --query "tags.${RESOURCE_GROUP_TAG}" -o tsv)
 
+KUBE_CONF=".kube/config_${RESOURCE_GROUP}"
 az aks get-credentials \
     --resource-group ${RESOURCE_GROUP} \
-	--name ${CLUSTER_NAME}
+	--name ${CLUSTER_NAME} \
+	-f ${KUBE_CONF}
 
-echo "K8s Dashboard: http://localhost:${PORT}/api/v1/namespaces/kube-system/services/http:kubernetes-dashboard:/proxy/#!/overview?namespace=${NAMESPACE}"
+K8S_DASHBOARD_SECRET=$(kubectl --kubeconfig=${KUBE_CONF} -n kube-system get secret -o name|grep kubernetes-dashboard-token)
+TOKEN=$(kubectl --kubeconfig=${KUBE_CONF} -n kube-system get ${K8S_DASHBOARD_SECRET} --output="jsonpath={.data.\token}" | base64 -d)
+echo "Token: "${TOKEN}
+
+echo "K8s Dashboard: http://localhost:${PORT}/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/#!/overview?namespace=${NAMESPACE}"
 echo ""
 
 az aks browse \
     --listen-address 0.0.0.0 \
     --resource-group ${RESOURCE_GROUP} \
     --name ${CLUSTER_NAME}
-
