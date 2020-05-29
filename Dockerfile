@@ -15,7 +15,7 @@ ENV HELM_VERSION=3.2.1
 # https://github.com/kubernetes/kubectl/releases
 ENV KUBECTL_VERSION=1.16.7
 # https://github.com/Azure/azure-cli/releases
-ENV AZURE_CLI_VERSION=2.5.1
+ENV AZURE_CLI_VERSION=2.6.0
 
 LABEL KUBECTL_VERSION=${KUBECTL_VERSION} \
 	HELM_VERSION=${HELM_VERSION} \
