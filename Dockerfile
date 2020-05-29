@@ -58,3 +58,6 @@ COPY az /usr/bin/az
 RUN chmod +x /usr/bin/az
 
 COPY ./az_aks_browse.sh /root/az_aks_browse.sh
+
+# nice-to-have
+RUN apk add --no-cache fish
