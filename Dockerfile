@@ -9,13 +9,13 @@ FROM alpine:3.11.6
 
 
 # https://github.com/fluxcd/flux/releases
-ENV FLUX_VERSION=1.19.0
+ENV FLUX_VERSION=1.21.0
 # https://github.com/helm/helm/releases
-ENV HELM_VERSION=3.2.1
+ENV HELM_VERSION=3.3.4
 # https://github.com/kubernetes/kubectl/releases
-ENV KUBECTL_VERSION=1.16.7
+ENV KUBECTL_VERSION=1.19.2
 # https://github.com/Azure/azure-cli/releases
-ENV AZURE_CLI_VERSION=2.6.0
+ENV AZURE_CLI_VERSION=2.13.0
 
 LABEL KUBECTL_VERSION=${KUBECTL_VERSION} \
 	HELM_VERSION=${HELM_VERSION} \
